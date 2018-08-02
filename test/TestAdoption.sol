@@ -6,4 +6,25 @@ import "../contracts/Adoption.sol";
 
 contract TestAdoption {
     Adoption adoption = Adoption(DeployedAddresses.Adoption());
+
+    function testUserCanAdoptPet() public {
+        uint returnedId = adoption.adopt(8);
+        uint expected = 8;
+
+        Assert.equal(returnedId, expected, "Adoption of pet ID 8 should be recorded.");
+    }
+
+    function testGetAdopterAddressByGetId() public {
+        address expected = this;
+        address adopter = adoption.adopters(8);
+
+        Assert.equal(adopter, expected, "Owner of pet ID 8 should be recorded");
+    }
+
+    function testGetAdopterAddressByPetIdInArray() public {
+        address expected = this;
+        address[16] memory adopters = adoption.getAdopters();
+
+        Assert.equal(expected, adopters[8], "Owner of pet ID 8 must be recorded");
+    }
 }
