@@ -25,6 +25,6 @@ contract TestAdoption {
         address expected = this;
         address[16] memory adopters = adoption.getAdopters();
 
-        Assert.equal(expected, adopters[8], "Owner of pet ID 8 must be recorded");
+        Assert.equal(adopters[8], expected, "Owner of pet ID 8 must be recorded");
     }
 }
